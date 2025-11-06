@@ -8,10 +8,10 @@
 
 int main(void)
 {
-    constexpr size_t num_bodies { 5000 };
-    float dt                    { 0.00001f };
+    constexpr size_t num_bodies { 10000 };
+    float dt                    { 0.0001f };
     Simulation sim              { num_bodies, dt };
-    Renderer renderer           { 640, 480, "Barnes-Hut Simulation" };
+    Renderer renderer           { 640, 640, "Barnes-Hut Simulation" };
 
     while (!renderer.should_close()) {
         sim.update();

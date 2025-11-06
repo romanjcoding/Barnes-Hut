@@ -1,7 +1,10 @@
 #pragma once
+#include "utils.h"
 #include "body.h"
 #include <cstdint>
 #include <vector>
+#include <iostream>
+#include <cmath>
 
 struct Simulation {
     std::vector<Body> m_bodies;
@@ -17,21 +20,9 @@ struct Simulation {
     std::vector<Body> generate_points(int num_bodies) {
         std::vector<Body> bodies (num_bodies);
         for (Body& body : bodies) {
-            float x = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-            x = 2 * (x - 0.5f);
-            float y = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-            y = 2 * (y - 0.5f);
-
-            float velocity_x = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-            velocity_x = 0.0005 * (velocity_x - 0.5f);
-
-            float velocity_y = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-            velocity_y = 0.0005 * (velocity_y - 0.5f);
-
-            body.m_position[0] = x;
-            body.m_position[1] = y;
-            body.m_velocity[0] = velocity_x;
-            body.m_velocity[1] = velocity_y;
+            std::array<float, 2> rand { utils::outer_biased_disk_point(1.f, 0.5f) };
+            body.m_position[0] = rand[0];
+            body.m_position[1] = rand[1];
         }
         return bodies;
     }
